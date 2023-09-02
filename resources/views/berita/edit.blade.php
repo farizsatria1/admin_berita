@@ -8,7 +8,7 @@ $preTitle = "Edit Data Berita";
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('berita.update', $berita->id) }}" method="post">
+        <form action="{{ route('berita.update', $berita->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -29,8 +29,20 @@ $preTitle = "Edit Data Berita";
                     @endforeach
                 </select>
             </div>
+            
+            
 
-            <div class="mb-3">
+            <div class="form-group">
+                <label class="form-label">Gambar Saat Ini:</label>
+                @if ($berita->image)
+                <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}" width="100">
+                @else
+                <p>Gambar tidak tersedia.</p>
+                @endif
+                <input type="file" class="form-control-file" id="image" name="image" value="{{$berita->image}}">
+            </div>
+
+            <div class="mb-3 mt-3">
                 <label class="form-label">Isi Berita</label>
                 <textarea class="form-control" name="content" rows="5" id="contentTextarea" placeholder="Isi Berita">{{$berita->content}}"</textarea>
             </div>

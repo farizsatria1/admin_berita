@@ -14,6 +14,7 @@ class Berita extends Model
         'author',
         'kategori_id',
         'content',
+        'image',
     ];
 
     public function kategori()

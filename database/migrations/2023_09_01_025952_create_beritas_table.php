@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->text('content');
+            $table->string('image');
             $table->unsignedBigInteger('kategori_id'); // Kolom foreign key
             $table->timestamps();
 
