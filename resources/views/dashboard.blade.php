@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-</head>
-<body>
-    <div class="logo"></div>
-    <div class="login-block">
-        <h1>Login</h1>
-        <input type="text" value="" placeholder="Username" id="username" />
-        <input type="password" value="" placeholder="Password" id="password" />
-        <button>Submit</button>
-    </div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
 
-<script async src="//jsfiddle.net/erikasaves/8p1weyud/2/embed/"></script>
-</body>
-</html>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    {{ __("You're logged in!") }}
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

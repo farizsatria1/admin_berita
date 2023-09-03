@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
+    public function login()
     {
         if (Auth::check()) {
-            return redirect('berita.index');
+            return redirect('berita');
         }else{
             return view('login');
         }
@@ -25,7 +25,7 @@ class LoginController extends Controller
         ];
 
         if (Auth::Attempt($data)) {
-            return redirect('berita.index');
+            return redirect('berita');
         }else{
             Session::flash('error', 'Email atau Password Salah');
             return redirect('/');
@@ -38,4 +38,3 @@ class LoginController extends Controller
         return redirect('/');
     }
 }
-

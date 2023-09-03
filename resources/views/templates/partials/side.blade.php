@@ -7,7 +7,7 @@
     <span style="text-align: center; color: white; font-size: 24px; font-weight: bold;" class="mt-4">Portal Berita</span>
     <h1 class="navbar-brand mt-3">
       <a href="/berita">
-        <img src="{{ asset('static/agam-logo.png') }}" width="170" height="210 " alt="Tabler" >
+        <img src="{{ asset('static/agam-logo.png') }}" width="170" height="210 " alt="Tabler">
       </a>
     </h1>
     <div class="navbar-nav flex-row d-lg-none">
@@ -168,21 +168,7 @@
     </div>
     <div class="collapse navbar-collapse" id="sidebar-menu">
       <ul class="navbar-nav pt-lg-3">
-        <li class="nav-item">
-          <a class="nav-link" href="/berita">
-            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-              </svg>
-            </span>
-            <span class="nav-link-title">
-              Home
-            </span>
-          </a>
-        </li>
+
 
         <li class="nav-item">
           <a class="nav-link" href="/berita">
@@ -193,7 +179,7 @@
                 <path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" />
               </svg>
             </span>
-            <span class="nav-link-title">
+            <span class="nav-link-title fw-bold">
               Data Berita
             </span>
           </a>
@@ -211,8 +197,24 @@
                 <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
               </svg>
             </span>
-            <span class="nav-link-title">
+            <span class="nav-link-title fw-bold">
               Tambah Kategori
+            </span>
+          </a>
+        </li>
+
+        <li class="nav-item mt-5">
+          <a class="nav-link" href="{{route('actionlogout')}}">
+            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M10 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2"></path>
+                <path d="M15 12h-12l3 -3"></path>
+                <path d="M6 15l-3 -3"></path>
+              </svg>
+            </span>
+            <span class="nav-link-title fw-bold ">
+              Logout
             </span>
           </a>
         </li>
