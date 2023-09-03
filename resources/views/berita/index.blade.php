@@ -19,7 +19,6 @@
 @section('content')
 <div class="card">
     <div class="table-responsive">
-        @if (count($beritas) > 0)
         <table class="table table-vcenter table-bordered">
             <thead>
                 <tr>
@@ -61,9 +60,6 @@
                 @endforeach
             </tbody>
         </table>
-        @else
-        <p>Tidak ada berita yang tersedia.</p>
-        @endif
     </div>
 </div>
 @endsection

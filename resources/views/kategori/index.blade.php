@@ -29,11 +29,6 @@
                     <td>
                         <div class="btn-group ">
                             <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-warning mx-1">Edit</a>
-                            <form action="{{ route('kategori.destroy', $kategori->id) }}" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" value="Hapus" class="btn btn-danger mx-1">
-                            </form>
                         </div>
                     </td>
                 </tr>

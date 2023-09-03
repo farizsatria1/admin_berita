@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 
@@ -48,9 +49,4 @@ class KategoriController extends Controller
         return redirect()->route('kategori.index');
     }
 
-    public function destroy($id){
-        $kategori  = Kategori::find($id);
-        $kategori->delete();
-        return redirect()->route('kategori.index');
-    }
 }

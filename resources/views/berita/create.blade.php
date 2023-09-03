@@ -2,7 +2,7 @@
 
 @php
 $title = "Berita Kab.Agam";
-$preTitle = "Daftar Berita";
+$preTitle = "Tambah Berita";
 @endphp
 
 @section('content')
