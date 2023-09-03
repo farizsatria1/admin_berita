@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Kategori;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
+
+Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class,'actionlogin'])->name('actionlogin');
+Route::post('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
