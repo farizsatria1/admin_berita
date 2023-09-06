@@ -46,8 +46,8 @@
                         Gambar tidak tersedia
                         @endif
                     </td>
-                    <td>{{ Str::limit($berita->content, 400) }}</td>
-                    <td>{{ $berita->created_at->format('d M Y') }}</td>
+                    <td>{{ Str::limit($berita->content, 300) }}</td>
+                    <td>{{ $berita->created_at->format('d M Y H:i:s') }}</td>
                     <td>
                         <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-warning mb-1 btn-sm">Edit</a>
                         <form action="{{ route('berita.destroy', $berita->id) }}" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">

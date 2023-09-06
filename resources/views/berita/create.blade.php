@@ -50,10 +50,10 @@ $preTitle = "Tambah Berita";
 
             <div class="mb-3">
                 <label class="form-label">Tanggal</label>
-                <input type="date" name="created_at" class="form-control
+                <input type="datetime-local" name="created_at" class="form-control
                 @error('created_at') 
                     is-invalid
-                @enderror" placeholder="Masukan Tanggal" value="{{ old('created_at') }}" max="{{ date('Y-m-d') }}">
+                @enderror" placeholder="Masukan Tanggal" value="{{ old('created_at') }}">
                 @error('created_at')
                 <span class="invalid-feedback">{{$message}}</span>
                 @enderror
