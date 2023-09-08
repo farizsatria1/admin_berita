@@ -23,8 +23,8 @@ $preTitle = "Edit Data Berita";
             <div class="mb-3">
                 <label class="form-label">Kategori</label>
                 <select class="form-select" name="kategori_id">
-                    @foreach ($kategoriList as $id => $nama)
                     <option value="">--Pilih Kategori--</option>
+                    @foreach ($kategoriList as $id => $nama)
                     <option value="{{ $id }}" {{ $berita->kategori_id == $id ? 'selected' : '' }}>{{ $nama }}</option>
                     @endforeach
                 </select>
@@ -32,14 +32,15 @@ $preTitle = "Edit Data Berita";
             
             
 
-            <div class="form-group">
-                <label class="form-label">Gambar Saat Ini:</label>
+            <div class="mb-3">
+                <label class="form-label">Gambar</label>
                 @if ($berita->image)
-                <img src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}" width="100">
+                <img id="preview" src="{{ asset('storage/' . $berita->image) }}" alt="{{ $berita->title }}"  width="auto" height="100" style="margin-bottom: 0.5rem;">
                 @else
                 <p>Gambar tidak tersedia.</p>
                 @endif
-                <input type="file" class="form-control-file" id="image" name="image" value="{{$berita->image}}">
+                <br>
+                <input type="file" class="form-control-file" id="image" name="image" onchange="previewImage(event, 'preview')">
             </div>
 
             <div class="mb-3 mt-3">

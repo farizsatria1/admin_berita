@@ -30,14 +30,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/berita',[BeritaController::class, 'store'])->name('berita.store')->middleware('auth');  
     Route::get('/berita/{id}/edit',[BeritaController::class, 'edit'])->name('berita.edit')->middleware('auth'); 
     Route::put('/berita/{id}',[BeritaController::class, 'update'])->name('berita.update')->middleware('auth');  
-    Route::delete('/berita/{id}',[BeritaController::class, 'destroy'])->name('berita.destroy')->middleware('auth');  
+    Route::get('/berita/{id}',[BeritaController::class, 'destroy'])->name('berita.destroy')->middleware('auth');  
     
     Route::get('/kategori',[KategoriController::class, 'index'])->name('kategori.index')->middleware('auth'); 
     Route::get('/kategori/create',[KategoriController::class, 'create'])->name('kategori.create')->middleware('auth'); 
     Route::post('/kategori',[KategoriController::class, 'store'])->name('kategori.store')->middleware('auth');  
     Route::get('/kategori/{id}/edit',[KategoriController::class, 'edit'])->name('kategori.edit')->middleware('auth');  
-    Route::put('/kategori/{id}',[KategoriController::class, 'update'])->name('kategori.update')->middleware('auth');  
-    Route::delete('/kategori/{id}',[KategoriController::class, 'destroy'])->name('kategori.destroy')->middleware('auth');  
+    Route::put('/kategori/{id}',[KategoriController::class, 'update'])->name('kategori.update')->middleware('auth');    
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');

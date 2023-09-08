@@ -24,7 +24,7 @@
                 <tr>
                     <th style="text-align: center;">No</th>
                     <th style="width: 15%; text-align: center;">Judul</th>
-                    <th style="width: 10%; text-align: center;">Author</th>
+                    <th style="text-align: center;">Author</th>
                     <th style="text-align: center;">Kategori</th>
                     <th style="text-align: center;">Gambar</th>
                     <th style="text-align: center;">Isi Berita</th>
@@ -47,14 +47,15 @@
                         @endif
                     </td>
                     <td>{{ Str::limit($berita->content, 300) }}</td>
-                    <td>{{ $berita->created_at->format('d M Y H:i:s') }}</td>
-                    <td>
-                        <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-warning mb-1 btn-sm">Edit</a>
-                        <form action="{{ route('berita.destroy', $berita->id) }}" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Hapus" class="btn btn-danger btn-sm">
-                        </form>
+                    <td style="text-align: center;">{{ $berita->created_at->format('d M Y H:i:s') }}</td>
+                    
+                    <td style="text-align: center;">
+                        <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-warning mb-2">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a class="btn btn-danger" onclick="confirmDelete('{{ $berita->id }}')">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach

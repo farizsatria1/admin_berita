@@ -25,7 +25,7 @@ class LoginController extends Controller
         ];
 
         if (Auth::Attempt($data)) {
-            return redirect('berita');
+            return redirect('berita')->with('success', 'Berhasil Login');
         }else{
             Session::flash('error', 'Email atau Password Salah');
             return redirect('/');

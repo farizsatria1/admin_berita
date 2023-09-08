@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class BeritaResource extends JsonResource
+class BeritaDetailresource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,13 +19,11 @@ class BeritaResource extends JsonResource
             "id" => $this->id,
             "title" => $this->title,
             "author" => $this->author,
+            "kategori_id" => $this->kategori_id,
             "image" => Storage::url($this->image),
-            "created_at" => date_format($this->created_at,"Y-m-d H:i:s"),
             "content" => $this->content,
+            "created_at" => date_format($this->created_at,"l, Y-m-d H:i:s"),
             "kategori" => $this->whenLoaded('kategori')
         ];
     }
 }
-
-
-

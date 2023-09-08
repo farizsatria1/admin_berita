@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BeritaDetailresource;
 use App\Http\Resources\BeritaResource;
 use App\Models\Berita;
 use App\Models\Kategori;
@@ -14,25 +15,32 @@ class BeritaController extends Controller
     public $table = "beritas";
 
     //Api Berita
-    public function berita(){
-        $berita = Berita::all();
+    public function berita()
+    {
+        $berita = Berita::with('kategori:id,nama_kategori')->get();
 
-        $res = [];
-        foreach ($berita as $value) {
-            $data = [
-                "id" => $value->id,
-                "title" => $value->title,
-                "author" => $value->author,
-                "content" => $value->content,
-                "image" =>Storage::url($value->image),
-                "kategori_id" => $value->kategori_id,
-                "created_at" => Carbon::parse($value->created_at)->format('Y-m-d H:i:s'),
-            ];
-            $res[] = $data;
-        }
-        // return response()->json($res);
-        return response()->json(['data' => $res]);
-        // return BeritaResource::collection($res);
+        // $res = [];
+        // foreach ($berita as $value) {
+        //     $data = [
+        //         "id" => $value->id,
+        //         "title" => $value->title,
+        //         "author" => $value->author,
+        //         "content" => $value->content,
+        //         "image" => Storage::url($value->image),
+        //         "kategori_id" => $value->kategori_id,
+        //         "created_at" => Carbon::parse($value->created_at)->format('Y-m-d H:i:s'),
+        //     ];
+        //     $res[] = $data;
+        // }
+        // return response()->json($berita);
+        // return response()->json(['data' => $res]);
+        return BeritaResource::collection($berita);
+    }
+
+    public function show($id)
+    {
+        $show = Berita::with('kategori:id,nama_kategori')->findOrFail($id);
+        return new BeritaDetailResource($show);
     }
 
     public function index(Request $request)
@@ -87,9 +95,9 @@ class BeritaController extends Controller
             $image = $request->file('image');
             $namafile = time() . '.' . $image->getClientOriginalExtension();
             $path = $image->storeAs('images', $namafile); // Simpan gambar ke direktori penyimpanan
-        
+
             $berita = new Berita();
-        
+
             // Setel atribut-atribut lainnya    
             $berita->title = $request->title;
             $berita->author = $request->author;
@@ -97,17 +105,13 @@ class BeritaController extends Controller
             $berita->image = $path; // Gunakan path lengkap gambar
             $berita->created_at = $request->created_at;
             $berita->content = $request->content;
-        
+
             $berita->save();
-        
-            // Buat URL gambar dengan perintah yang diberikan
-            $gambarURL = Storage::url($path); // Menggunakan Storage::url()
-        
-            return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan. URL gambar: ' . $gambarURL);
+
+            return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan');
         } else {
             return back()->with('error', 'Gagal mengunggah gambar.');
         }
-        
     }
 
     public function edit($id)
@@ -128,6 +132,7 @@ class BeritaController extends Controller
             'title' => 'required',
             'author' => 'required',
             'kategori_id' => 'required',
+            'image' => 'required',
             'content' => 'required',
         ]);
 
@@ -151,12 +156,9 @@ class BeritaController extends Controller
             $berita->image = $path;
             $berita->save();
 
-            // Buat URL gambar dengan perintah yang diberikan
-            $gambarURL = url('/') . Storage::url('public/images') . '/' . $namafile;
-
-            return redirect()->route('berita.index')->with('success', 'Gambar berita berhasil diperbarui. URL gambar: ' . $gambarURL);
+            return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui');
         } else {
-            return back()->with('error', 'Gagal mengunggah gambar.');
+            return back()->with('error', 'Gagal Mengupdate Berita.');
         }
     }
 
@@ -164,6 +166,6 @@ class BeritaController extends Controller
     {
         $berita  = Berita::find($id);
         $berita->delete();
-        return redirect()->route('berita.index');
+        return redirect()->route('berita.index')->with('success', 'Data Berhasil Dihapus');
     }
 }

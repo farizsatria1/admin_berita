@@ -1,8 +1,8 @@
 @extends('templates.default')
 
 @php
-    $title = "Berita Kab.Agam";
-    $preTitle = "Daftar Kategori";
+$title = "Berita Kab.Agam";
+$preTitle = "Daftar Kategori";
 @endphp
 
 @push('page-action')
@@ -16,7 +16,7 @@
         <table class="table table-vcenter table-bordered">
             <thead>
                 <tr>
-                    <th style="width: 5%;">No</th>                  
+                    <th style="width: 5%;">No</th>
                     <th>Kategori</th>
                     <th>Aksi</th>
                 </tr>
@@ -28,7 +28,9 @@
                     <td>{{ $kategori->nama_kategori }}</td>
                     <td>
                         <div class="btn-group ">
-                            <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-warning mx-1">Edit</a>
+                            <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-warning mx-1">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
                         </div>
                     </td>
                 </tr>
