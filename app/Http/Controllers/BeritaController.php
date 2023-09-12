@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BeritaDetailresource;
 use App\Http\Resources\BeritaResource;
+use App\Http\Resources\KategoriResource;
+use App\Http\Resources\ListKategoriResource;
 use App\Models\Berita;
 use App\Models\Kategori;
 use Carbon\Carbon;
@@ -17,31 +19,31 @@ class BeritaController extends Controller
     //Api Berita
     public function berita()
     {
-        $berita = Berita::with('kategori:id,nama_kategori')->get();
-
-        // $res = [];
-        // foreach ($berita as $value) {
-        //     $data = [
-        //         "id" => $value->id,
-        //         "title" => $value->title,
-        //         "author" => $value->author,
-        //         "content" => $value->content,
-        //         "image" => Storage::url($value->image),
-        //         "kategori_id" => $value->kategori_id,
-        //         "created_at" => Carbon::parse($value->created_at)->format('Y-m-d H:i:s'),
-        //     ];
-        //     $res[] = $data;
-        // }
-        // return response()->json($berita);
-        // return response()->json(['data' => $res]);
+        $berita = Berita::with('kategori:id,nama_kategori,image_kategori')->get();
         return BeritaResource::collection($berita);
     }
-
+    
     public function show($id)
     {
         $show = Berita::with('kategori:id,nama_kategori')->findOrFail($id);
         return new BeritaDetailResource($show);
     }
+
+    public function listkategori()
+    {
+        $kategori = Kategori::get();
+        return ListKategoriResource::collection($kategori);
+    }
+
+    public function kategori($id)
+    {
+        $kategori = Berita::whereHas('kategori', function ($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
+    
+        return KategoriResource::collection($kategori);
+    }
+
 
     public function index(Request $request)
     {
@@ -110,7 +112,7 @@ class BeritaController extends Controller
 
             return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan');
         } else {
-            return back()->with('error', 'Gagal mengunggah gambar.');
+            return back()->with('error', 'Berita Gagal ditambahkan.');
         }
     }
 
@@ -166,6 +168,6 @@ class BeritaController extends Controller
     {
         $berita  = Berita::find($id);
         $berita->delete();
-        return redirect()->route('berita.index')->with('success', 'Data Berhasil Dihapus');
+        return redirect()->route('berita.index')->with('success', 'Berita Berhasil Dihapus');
     }
 }

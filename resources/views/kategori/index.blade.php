@@ -17,8 +17,9 @@ $preTitle = "Daftar Kategori";
             <thead>
                 <tr>
                     <th style="width: 5%;">No</th>
-                    <th>Kategori</th>
-                    <th>Aksi</th>
+                    <th style="text-align: center;">Nama Kategori</th>
+                    <th style="text-align: center;">Gambar Kategori</th>
+                    <th style="text-align: center;">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +27,14 @@ $preTitle = "Daftar Kategori";
                 <tr>
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $kategori->nama_kategori }}</td>
-                    <td>
+                    <td style="text-align: center;">
+                        @if ($kategori->image_kategori)
+                        <img src="{{ asset('storage/' . $kategori->image_kategori) }}" alt="{{ $kategori->title }}" width="150" style="display: block; margin: 0 auto;">
+                        @else
+                        Gambar tidak tersedia
+                        @endif
+                    </td>
+                    <td style="text-align: center;">
                         <div class="btn-group ">
                             <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-warning mx-1">
                                 <i class="fa-solid fa-pen-to-square"></i>
