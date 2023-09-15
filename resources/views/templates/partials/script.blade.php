@@ -26,7 +26,33 @@
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Cancelled',
-                    'Your imaginary file is safe :)',
+                    'Aksi dibatalkan',
+                    'error'
+                )
+            }
+        });
+    }
+</script>
+
+<!-- SweetAlert Confirmation Video -->
+<script>
+    function Delete(id) {
+        Swal.fire({
+            title: 'Apakah Kamu Yakin',
+            text: "Kamu akan menghapus video ini",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Iya',
+            cancelButtonText: 'Tidak',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete route with the item's ID
+                window.location.href = "/video/" + id;
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled',
+                    'Aksi dibatalkan',
                     'error'
                 )
             }

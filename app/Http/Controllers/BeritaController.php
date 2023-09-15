@@ -22,7 +22,7 @@ class BeritaController extends Controller
         $berita = Berita::with('kategori:id,nama_kategori,image_kategori')->get();
         return BeritaResource::collection($berita);
     }
-    
+
     public function show($id)
     {
         $show = Berita::with('kategori:id,nama_kategori')->findOrFail($id);
@@ -40,11 +40,23 @@ class BeritaController extends Controller
         $kategori = Berita::whereHas('kategori', function ($query) use ($id) {
             $query->where('id', $id);
         })->get();
-    
+
         return KategoriResource::collection($kategori);
     }
 
+    public function cari(Request $request)
+    {
+        $kataKunci = $request->input('kata_kunci');
+        $hasilPencarian = Berita::where('title', 'LIKE', "%$kataKunci%")->get();
 
+        // Mengubah hasil pencarian ke BeritaResource
+        $hasilPencarianResource = BeritaResource::collection($hasilPencarian);
+
+        return response()->json($hasilPencarianResource);
+    }
+
+
+    // Fungsi untuk Web
     public function index(Request $request)
     {
         $search = $request->input('search');

@@ -202,6 +202,21 @@
           </a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link" href="/video">
+            <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-youtube" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M2 8a4 4 0 0 1 4 -4h12a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-12a4 4 0 0 1 -4 -4v-8z"></path>
+                <path d="M10 9l5 3l-5 3z"></path>
+              </svg>
+            </span>
+            <span class="nav-link-title fw-bold">
+              Tambah Video
+            </span>
+          </a>
+        </li>
+
         <li class="nav-item mt-5">
           <a class="nav-link" href="{{route('actionlogout')}}">
             <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->

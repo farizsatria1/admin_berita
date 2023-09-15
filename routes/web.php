@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,6 +38,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/kategori',[KategoriController::class, 'store'])->name('kategori.store')->middleware('auth');  
     Route::get('/kategori/{id}/edit',[KategoriController::class, 'edit'])->name('kategori.edit')->middleware('auth');  
     Route::put('/kategori/{id}',[KategoriController::class, 'update'])->name('kategori.update')->middleware('auth');    
+
+    Route::get('/video',[VideoController::class, 'index'])->name('video.index')->middleware('auth'); 
+    Route::get('/video/create',[VideoController::class, 'create'])->name('video.create')->middleware('auth'); 
+    Route::post('/video',[VideoController::class, 'store'])->name('video.store')->middleware('auth');  
+    Route::get('/video/{id}/edit',[VideoController::class, 'edit'])->name('video.edit')->middleware('auth');  
+    Route::put('/video/{id}',[VideoController::class, 'update'])->name('video.update')->middleware('auth');   
+    Route::get('/video/{id}',[VideoController::class, 'destroy'])->name('video.destroy')->middleware('auth'); 
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');

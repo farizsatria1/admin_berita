@@ -33,12 +33,4 @@ $preTitle = "Edit Kategori";
         </form>
     </div>
 </div>
-
-<script>
-    document.addEventListener("input", function() {
-        const textarea = document.getElementById("contentTextarea");
-        textarea.style.height = "auto";
-        textarea.style.height = (textarea.scrollHeight) + "px";
-    });
-</script>
 @endsection
