@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\UserappController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,8 @@ Route::get('/search',[BeritaController::class,'cari']);
 
 //API Video
 Route::get('/videos',[VideoController::class,'list']);
-Route::get('/videos/{id}',[VideoController::class,'show']);
+
+//API Profile dan Authentikasi
+Route::post('/daftar', [UserappController::class, 'daftar']);
+Route::post('/login', [UserappController::class, 'login']);
+

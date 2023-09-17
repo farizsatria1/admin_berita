@@ -14,10 +14,6 @@ class VideoController extends Controller
         return response()->json($videos);
     }
 
-    public function show(Video $id)
-    {
-        return response()->json($id);
-    }
 
 
     //Untuk Web

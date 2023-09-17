@@ -19,32 +19,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/berita', function () {
-    return view('berita.index');
-})->middleware(['auth', 'verified'])->name('berita.index');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/berita',[BeritaController::class, 'index'])->name('berita.index')->middleware('auth'); 
-    Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+    Route::get('/berita',[BeritaController::class, 'index'])->name('berita.index'); 
+    Route::get('actionlogout', [LoginController::class, 'actionlogout'])->name('actionlogout'); 
     
-    Route::get('/berita/create',[BeritaController::class, 'create'])->name('berita.create')->middleware('auth'); 
-    Route::post('/berita',[BeritaController::class, 'store'])->name('berita.store')->middleware('auth');  
-    Route::get('/berita/{id}/edit',[BeritaController::class, 'edit'])->name('berita.edit')->middleware('auth'); 
-    Route::put('/berita/{id}',[BeritaController::class, 'update'])->name('berita.update')->middleware('auth');  
-    Route::get('/berita/{id}',[BeritaController::class, 'destroy'])->name('berita.destroy')->middleware('auth');  
+    Route::get('/berita/create',[BeritaController::class, 'create'])->name('berita.create');  
+    Route::post('/berita',[BeritaController::class, 'store'])->name('berita.store');   
+    Route::get('/berita/{id}/edit',[BeritaController::class, 'edit'])->name('berita.edit');  
+    Route::put('/berita/{id}',[BeritaController::class, 'update'])->name('berita.update');   
+    Route::get('/berita/{id}',[BeritaController::class, 'destroy'])->name('berita.destroy');   
     
-    Route::get('/kategori',[KategoriController::class, 'index'])->name('kategori.index')->middleware('auth'); 
-    Route::get('/kategori/create',[KategoriController::class, 'create'])->name('kategori.create')->middleware('auth'); 
-    Route::post('/kategori',[KategoriController::class, 'store'])->name('kategori.store')->middleware('auth');  
-    Route::get('/kategori/{id}/edit',[KategoriController::class, 'edit'])->name('kategori.edit')->middleware('auth');  
-    Route::put('/kategori/{id}',[KategoriController::class, 'update'])->name('kategori.update')->middleware('auth');    
+    Route::get('/kategori',[KategoriController::class, 'index'])->name('kategori.index');  
+    Route::get('/kategori/create',[KategoriController::class, 'create'])->name('kategori.create');  
+    Route::post('/kategori',[KategoriController::class, 'store'])->name('kategori.store');   
+    Route::get('/kategori/{id}/edit',[KategoriController::class, 'edit'])->name('kategori.edit');   
+    Route::put('/kategori/{id}',[KategoriController::class, 'update'])->name('kategori.update');     
 
-    Route::get('/video',[VideoController::class, 'index'])->name('video.index')->middleware('auth'); 
-    Route::get('/video/create',[VideoController::class, 'create'])->name('video.create')->middleware('auth'); 
-    Route::post('/video',[VideoController::class, 'store'])->name('video.store')->middleware('auth');  
-    Route::get('/video/{id}/edit',[VideoController::class, 'edit'])->name('video.edit')->middleware('auth');  
-    Route::put('/video/{id}',[VideoController::class, 'update'])->name('video.update')->middleware('auth');   
-    Route::get('/video/{id}',[VideoController::class, 'destroy'])->name('video.destroy')->middleware('auth'); 
+    Route::get('/video',[VideoController::class, 'index'])->name('video.index');  
+    Route::get('/video/create',[VideoController::class, 'create'])->name('video.create');  
+    Route::post('/video',[VideoController::class, 'store'])->name('video.store');   
+    Route::get('/video/{id}/edit',[VideoController::class, 'edit'])->name('video.edit');   
+    Route::put('/video/{id}',[VideoController::class, 'update'])->name('video.update');    
+    Route::get('/video/{id}',[VideoController::class, 'destroy'])->name('video.destroy');  
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
@@ -53,3 +50,4 @@ Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actio
 
 Route::get('register', [RegisterController::class, 'register'])->name('register');
 Route::post('register/action', [RegisterController::class, 'actionregister'])->name('actionregister');
+

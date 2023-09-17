@@ -8,28 +8,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $table = 'users'; // Ganti dengan nama tabel Anda
-    protected $primaryKey = 'id';
+    protected $guard = 'admin';
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
-
-    public function isAdmin()
-    {
-        return $this->role === 'admin'; // Ubah ini sesuai dengan pola penggunaan Anda
-    }
 
     /**
      * The attributes that should be hidden for serialization.
