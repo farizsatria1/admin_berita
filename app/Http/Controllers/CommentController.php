@@ -23,26 +23,17 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
+        // Validasi input komentar sesuai kebutuhan Anda
+        $validatedData = $request->validate([
+            'name' => 'required|string',
             'email' => 'required|email',
-            'comment' => 'required',
+            'comment' => 'required|string',
+            'berita_id' => 'required|integer',
         ]);
 
-        $comment = new Comment([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'comment' => $request->input('comment'),
-        ]);
+        // Simpan komentar baru
+        $komentar = Comment::create($validatedData);
 
-        $comment->save();
-
-        // Menggunakan CommentResource untuk mengubah objek Comment menjadi respons JSON.
-        $commentResource = new CommentResource($comment);
-
-        return response()->json([
-            'message' => 'Komentar berhasil disimpan',
-            'data' => $commentResource,
-        ], 201);
+        return response()->json($komentar, 201); // 201 berarti Created
     }
 }

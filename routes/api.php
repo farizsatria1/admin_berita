@@ -27,5 +27,5 @@ Route::post('/login', [UserappController::class, 'login']);
 
 //API Comment
 Route::get('/komen',[CommentController::class,'index']);
-Route::get('/komen/{berita_id}', [KomentarController::class, 'getByBeritaId']);
+Route::get('/komen/{berita_id}', [CommentController::class, 'getByBeritaId']); 
 Route::post('/komen', [CommentController::class, 'store']);

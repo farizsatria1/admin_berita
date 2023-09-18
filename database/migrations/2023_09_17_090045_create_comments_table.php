@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->text('comment');
+            $table->unsignedBigInteger('berita_id');
             $table->timestamps();
+
+            $table->foreign('berita_id')->references('id')->on('beritas');
         });
     }
 
