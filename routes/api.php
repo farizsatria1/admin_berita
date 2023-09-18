@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserappController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Http\Request;
@@ -24,3 +25,7 @@ Route::get('/videos',[VideoController::class,'list']);
 Route::post('/daftar', [UserappController::class, 'daftar']);
 Route::post('/login', [UserappController::class, 'login']);
 
+//API Comment
+Route::get('/komen',[CommentController::class,'index']);
+Route::get('/komen/{berita_id}', [KomentarController::class, 'getByBeritaId']);
+Route::post('/komen', [CommentController::class, 'store']);
