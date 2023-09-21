@@ -23,7 +23,7 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input komentar sesuai kebutuhan Anda
+        // Validasi input komentar
         $validatedData = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email',

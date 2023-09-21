@@ -56,6 +56,8 @@ class BeritaController extends Controller
     }
 
 
+    
+
     // Fungsi untuk Web
     public function index(Request $request)
     {
