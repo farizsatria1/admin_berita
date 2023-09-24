@@ -13,9 +13,8 @@ class KategoriController extends Controller
 
     public function index()
     {
-
         return view('kategori.index', [
-            'kategoris' => Kategori::latest()->get(),
+            'kategoris' => Kategori::latest()->paginate(10),
         ]);
     }
 
@@ -70,33 +69,30 @@ class KategoriController extends Controller
 
     public function update(Request $request, $id)
     {
-        $kategori  = Kategori::find($id);
+        $kategori = Kategori::find($id);
 
         $request->validate([
-            'image_kategori' => 'required',
             'nama_kategori' => 'required',
-        ]);
-
-        $kategori->update([
-            'nama_kategori' => $request->nama_kategori,
-            'image_kategori' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'image_kategori' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image_kategori')) {
+            // Hapus gambar lama jika ada
+            if (Storage::disk('public')->exists($kategori->image_kategori)) {
+                Storage::disk('public')->delete($kategori->image_kategori);
+            }
+
             $image_kategori = $request->file('image_kategori');
             $namafile = time() . '.' . $image_kategori->getClientOriginalExtension();
-            $path = $image_kategori->storeAs('images', $namafile); // Simpan gambar ke direktori penyimpanan
+            $path = $image_kategori->storeAs('images', $namafile, 'public'); // Simpan gambar ke direktori penyimpanan
 
-            // Hapus gambar lama jika ada
-            Storage::delete($kategori->image_kategori);
-
-            // Update gambar berita
+            // Update gambar kategori
             $kategori->image_kategori = $path;
-            $kategori->save();
-
-            return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui');
-        } else {
-            return back()->with('error', 'Gagal Mengupdate Kategori.');
         }
+
+        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->save();
+
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diperbarui');
     }
 }

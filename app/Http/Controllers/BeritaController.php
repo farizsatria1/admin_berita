@@ -56,24 +56,31 @@ class BeritaController extends Controller
     }
 
 
-    
+
 
     // Fungsi untuk Web
+
     public function index(Request $request)
     {
-        $search = $request->input('search');
+        $search = $request->input('search'); // Mengambil input pencarian dari form
+
+        // Menggunakan query builder untuk menggabungkan tabel Berita dengan tabel Kategori
         $query = Berita::with('kategori');
+
+        // Jika ada input pencarian, tambahkan kondisi pencarian ke query
         if ($search) {
             $query->where('title', 'like', '%' . $search . '%');
         }
 
-        $beritas = $query->latest()->get();
+        // Ambil data dengan pagination
+        $beritas = $query->latest()->paginate(10); // Ubah "get()" menjadi "paginate(10)"
 
         return view('berita.index', [
             'beritas' => $beritas,
             'search' => $search,
         ]);
     }
+
 
 
     public function create()
@@ -141,47 +148,49 @@ class BeritaController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $berita = Berita::findOrFail($id);
 
         $request->validate([
             'title' => 'required',
             'author' => 'required',
             'kategori_id' => 'required',
-            'image' => 'required',
             'content' => 'required',
         ]);
 
-        $berita->update([
-            'title' => $request->title,
-            'author' => $request->author,
-            'kategori_id' => $request->kategori_id,
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'content' => $request->content,
-        ]);
-
         if ($request->hasFile('image')) {
+            // Hapus gambar lama jika ada
+            if (Storage::disk('public')->exists($berita->image)) {
+                Storage::disk('public')->delete($berita->image);
+            }
+
             $image = $request->file('image');
             $namafile = time() . '.' . $image->getClientOriginalExtension();
-            $path = $image->storeAs('images', $namafile); // Simpan gambar ke direktori penyimpanan
-
-            // Hapus gambar lama jika ada
-            Storage::delete($berita->image);
+            $path = $image->storeAs('images', $namafile, 'public'); // Simpan gambar ke direktori penyimpanan
 
             // Update gambar berita
             $berita->image = $path;
-            $berita->save();
-
-            return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui');
-        } else {
-            return back()->with('error', 'Gagal Mengupdate Berita.');
         }
+
+        $berita->title = $request->title;
+        $berita->author = $request->author;
+        $berita->kategori_id = $request->kategori_id;
+        $berita->content = $request->content;
+        $berita->save();
+
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui');
     }
+
 
     public function destroy($id)
     {
-        $berita  = Berita::find($id);
+        $berita = Berita::find($id);
+
+        // Hapus semua komentar terkait
+        $berita->comments()->delete();
+
+        // Hapus berita
         $berita->delete();
+
         return redirect()->route('berita.index')->with('success', 'Berita Berhasil Dihapus');
     }
 }

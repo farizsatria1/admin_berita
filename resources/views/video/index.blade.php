@@ -42,4 +42,10 @@ $preTitle = "Daftar Video";
         </table>
     </div>
 </div>
+
+<br>
+<div class="text-center">
+    {{ $videos->links('pagination::bootstrap-5') }}
+</div>
+
 @endsection

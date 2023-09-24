@@ -47,4 +47,10 @@ $preTitle = "Daftar Kategori";
         </table>
     </div>
 </div>
+
+<br>
+<div class="text-center">
+    {{ $kategoris->links('pagination::bootstrap-5') }}
+</div>
+
 @endsection

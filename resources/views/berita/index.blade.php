@@ -48,7 +48,7 @@
                     </td>
                     <td>{{ Str::limit($berita->content, 300) }}</td>
                     <td style="text-align: center;">{{ $berita->created_at->format('d M Y H:i:s') }}</td>
-                    
+
                     <td style="text-align: center;">
                         <a href="{{ route('berita.edit', $berita->id) }}" class="btn btn-warning mb-2">
                             <i class="fa-solid fa-pen-to-square"></i>
@@ -63,4 +63,11 @@
         </table>
     </div>
 </div>
+
+<!-- Tambahkan navigasi halaman di bagian bawah tabel -->
+<br>
+<div class="text-center">
+    {{ $beritas->links('pagination::bootstrap-5') }}
+</div>
+
 @endsection
