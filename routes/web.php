@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GaleryController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\WisataController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +44,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/video/{id}/edit',[VideoController::class, 'edit'])->name('video.edit');   
     Route::put('/video/{id}',[VideoController::class, 'update'])->name('video.update');    
     Route::get('/video/{id}',[VideoController::class, 'destroy'])->name('video.destroy');  
+
+    Route::get('/galery',[GaleryController::class, 'index'])->name('galery.index');  
+    Route::get('/galery/create',[GaleryController::class, 'create'])->name('galery.create');  
+    Route::post('/galery',[GaleryController::class, 'store'])->name('galery.store');   
+    Route::get('/galery/{id}/edit',[GaleryController::class, 'edit'])->name('galery.edit');   
+    Route::put('/galery/{id}',[GaleryController::class, 'update'])->name('galery.update');    
+    Route::get('/galery/{id}',[GaleryController::class, 'destroy'])->name('galery.destroy'); 
+
+    Route::get('/wisata',[WisataController::class, 'index'])->name('wisata.index');  
+    Route::get('/wisata/create',[WisataController::class, 'create'])->name('wisata.create');  
+    Route::post('/wisata',[WisataController::class, 'store'])->name('wisata.store');   
+    Route::get('/wisata/{id}/edit',[WisataController::class, 'edit'])->name('wisata.edit');   
+    Route::put('/wisata/{id}',[WisataController::class, 'update'])->name('wisata.update');    
+    Route::get('/wisata/{id}',[WisataController::class, 'destroy'])->name('wisata.destroy');  
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');

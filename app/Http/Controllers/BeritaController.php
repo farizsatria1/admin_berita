@@ -82,7 +82,6 @@ class BeritaController extends Controller
     }
 
 
-
     public function create()
     {
         $kategoriList = Kategori::pluck('nama_kategori', 'id');
@@ -139,7 +138,6 @@ class BeritaController extends Controller
 
     public function edit($id)
     {
-
         $berita = Berita::find($id);
 
         $kategoriList = Kategori::pluck('nama_kategori', 'id');
@@ -184,6 +182,11 @@ class BeritaController extends Controller
     public function destroy($id)
     {
         $berita = Berita::find($id);
+
+        if (Storage::disk('public')->exists($berita->image)) {
+            // Hapus gambar dari penyimpanan jika ada
+            Storage::disk('public')->delete($berita->image);
+        }
 
         // Hapus semua komentar terkait
         $berita->comments()->delete();
