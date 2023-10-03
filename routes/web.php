@@ -3,6 +3,7 @@
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GaleryController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KulinerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -58,6 +59,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/wisata/{id}/edit',[WisataController::class, 'edit'])->name('wisata.edit');   
     Route::put('/wisata/{id}',[WisataController::class, 'update'])->name('wisata.update');    
     Route::get('/wisata/{id}',[WisataController::class, 'destroy'])->name('wisata.destroy');  
+
+    Route::get('/kuliner',[KulinerController::class, 'index'])->name('kuliner.index');  
+    Route::get('/kuliner/create',[KulinerController::class, 'create'])->name('kuliner.create');  
+    Route::post('/kuliner',[KulinerController::class, 'store'])->name('kuliner.store');   
+    Route::get('/kuliner/{id}/edit',[KulinerController::class, 'edit'])->name('kuliner.edit');   
+    Route::put('/kuliner/{id}',[KulinerController::class, 'update'])->name('kuliner.update');    
+    Route::get('/kuliner/{id}',[KulinerController::class, 'destroy'])->name('kuliner.destroy');  
 });
 
 Route::get('/', [LoginController::class, 'login'])->name('login');

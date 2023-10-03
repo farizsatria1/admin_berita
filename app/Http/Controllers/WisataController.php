@@ -22,6 +22,15 @@ class WisataController extends Controller
         return new WisataResource($show);
     }
 
+    public function cari(Request $request)
+    {
+        $kataKunci = $request->input('kata_kunci');
+        $hasilPencarian = Wisata::where('nama_wisata', 'LIKE', "%$kataKunci%")->get();
+
+        $hasilPencarianResource = WisataResource::collection($hasilPencarian);
+        return response()->json($hasilPencarianResource);
+    }
+
 
     //Web
     public function index(Request $request)

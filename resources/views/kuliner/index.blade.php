@@ -1,11 +1,11 @@
 @extends('templates.default')
 
 @section('title', 'Berita Kab.Agam')
-@section('preTitle', 'Daftar Wisata')
+@section('preTitle', 'Daftar Kuliner')
 
 @push('page-action')
 <div class="input-group mb-3">
-    <form action="{{ route('wisata.index') }}" method="GET" class="w-100">
+    <form action="{{ route('kuliner.index') }}" method="GET" class="w-100">
         <div class="input-group">
             <input type="text" name="search" class="form-control me-2" placeholder="Search…" value="{{ request('search') }}">
             <button type="submit" class="btn btn-warning">
@@ -15,7 +15,7 @@
     </form>
 </div>
 
-<a href="{{ route('wisata.create') }}" class="btn btn-primary">+ Tambah Data</a>
+<a href="{{ route('kuliner.create') }}" class="btn btn-primary">+ Tambah Data</a>
 @endpush
 
 @section('content')
@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th style="text-align: center;">No</th>
-                    <th style="text-align: center;">Nama Wisata</th>
+                    <th style="text-align: center;">Nama Kuliner</th>
                     <th style="text-align: center;">Gambar</th>
                     <th style="text-align: center;">Alamat</th>
                     <th style="text-align: center;">URL Lokasi</th>
@@ -34,25 +34,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($wisatas as $index => $wisata)
+                @foreach ($kuliners as $index => $kuliner)
                 <tr>
                     <td>{{ $index + 1 }}</td>
-                    <td>{{ $wisata->nama_wisata }}</td>
+                    <td>{{ $kuliner->nama_kuliner }}</td>
                     <td style="text-align: center;">
-                        @if ($wisata->image)
-                        <img src="{{ asset('storage/' . $wisata->image) }}" alt="{{ $wisata->nama_wisata }}" width="100" style="display: block; margin: 0 auto;">
+                        @if ($kuliner->image)
+                        <img src="{{ asset('storage/' . $kuliner->image) }}" alt="{{ $kuliner->nama_kuliner }}" width="100" style="display: block; margin: 0 auto;">
                         @else
                         Gambar tidak tersedia
                         @endif
                     </td>
-                    <td>{{ $wisata->alamat }}</td>
-                    <td>{{ $wisata->url_map }}</td>
-                    <td>{{ Str::limit($wisata->ket_wisata, 200) }}</td>
+                    <td>{{ $kuliner->alamat }}</td>
+                    <td>{{ $kuliner->url_map }}</td>
+                    <td>{{ Str::limit($kuliner->ket_kuliner, 200) }}</td>
                     <td style="text-align: center;">
-                        <a href="{{ route('wisata.edit', $wisata->id) }}" class="btn btn-warning mb-2">
+                        <a href="{{ route('kuliner.edit', $kuliner->id) }}" class="btn btn-warning mb-2">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
-                        <a class="btn btn-danger" onclick="DeleteWisata('{{ $wisata->id }}')">
+                        <a class="btn btn-danger" onclick="DeleteKuliner('{{ $kuliner->id }}')">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </td>
@@ -66,7 +66,7 @@
 <!-- Tambahkan navigasi halaman di bagian bawah tabel -->
 <br>
 <div class="text-center">
-    {{ $wisatas->links('pagination::bootstrap-5') }}
+    {{ $kuliners->links('pagination::bootstrap-5') }}
 </div>
 
 @endsection

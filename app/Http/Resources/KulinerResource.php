@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
 
-class GaleryResource extends JsonResource
+class KulinerResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,12 @@ class GaleryResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "image_galery" => "http://192.168.37.146/storage/" . $this->image_galery,
-            "created_at" => date_format($this->created_at, "Y-m-d H:i:s"),
+            "nama_kuliner" => $this->nama_kuliner,
+            "alamat" => $this->alamat,
+            "url_map" => $this->url_map,
+            "image" => "http://192.168.37.146/storage/" . $this->image,
+            "ket_kuliner" => $this->ket_kuliner,
+            "created_at" => date_format($this->created_at,"l, Y-m-d H:i:s"),
         ];
     }
 }

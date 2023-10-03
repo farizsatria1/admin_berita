@@ -51,7 +51,6 @@ class BeritaController extends Controller
 
         // Mengubah hasil pencarian ke BeritaResource
         $hasilPencarianResource = BeritaResource::collection($hasilPencarian);
-
         return response()->json($hasilPencarianResource);
     }
 

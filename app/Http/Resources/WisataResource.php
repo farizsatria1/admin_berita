@@ -20,9 +20,9 @@ class WisataResource extends JsonResource
             "nama_wisata" => $this->nama_wisata,
             "alamat" => $this->alamat,
             "url_map" => $this->url_map,
-            "image" => Storage::url($this->image),
+            "image" => "http://192.168.37.146/storage/" . $this->image,
             "ket_wisata" => $this->ket_wisata,
-            "created_at" => date_format($this->created_at,"l, Y-m-d H:i:s"),
+            "created_at" => date_format($this->created_at, "l, Y-m-d H:i:s"),
         ];
     }
 }

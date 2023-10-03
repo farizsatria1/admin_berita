@@ -11,10 +11,6 @@ $preTitle = "Edit Galery";
         <form action="{{ route('galery.update', $galery->id) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="mb-3">
-                <label class="form-label">Edit Galery</label>
-                <input type="text" name="nama_galery" class="form-control" value="{{$galery->nama_galery}}" placeholder="Masukkan Galery Berita">
-            </div>
 
             <div class="mb-3">
                 <label class="form-label">Gambar</label>

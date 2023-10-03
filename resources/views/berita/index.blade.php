@@ -4,12 +4,14 @@
 @section('preTitle', 'Daftar Berita')
 
 @push('page-action')
-<div class="input-icon mb-3">
-    <form action="{{ route('berita.index') }}" method="GET">
-        <input type="text" name="search" class="form-control" placeholder="Search…" value="{{ request('search') }}">
-        <span class="input-icon-addon">
-        </span>
-        <button type="submit" style="display: none;"></button>
+<div class="input-group mb-3">
+    <form action="{{ route('berita.index') }}" method="GET" class="w-100">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control me-2" placeholder="Search…" value="{{ request('search') }}">
+            <button type="submit" class="btn btn-warning">
+                <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> 
+            </button>
+        </div>
     </form>
 </div>
 
